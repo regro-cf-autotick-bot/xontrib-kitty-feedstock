@@ -11,19 +11,21 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
-    - python >=3.5
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.5
+    - python >={{ python_min }}
     - xonsh
     # note that kitty and matplotlib are optional dependncies
 
 test:
+  requires:
+    - python {{ python_min }}
   commands:
     - xonsh -c "xontrib load kitty"
 
